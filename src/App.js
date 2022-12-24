@@ -1,15 +1,51 @@
-import React from "react";
+import React,{ Component } from "react";
 import "./App.css";
 import Contacts from "./Contacts";
 
-function App() {
-  return (
-    <div className="App">
+class App extends Component  {
+  constructor(props)
+  {
+    super(props);
+    this.addContact=this.addContact.bind(this);
+  }
 
-    <Contacts/>
-    </div>
+  state={
+    contacts:[
+      {
+      name:"Özal",
+      phone:"555 555 55"
+    },
+  {
+      name:"Tuğba",
+      phone:"555 555 33"
+  }
+  ]
+  };
 
-  );
+  addContact(contact)
+  {
+    console.log(contact);
+
+    const{contacts}=this.state;
+    contacts.push(contact);
+
+    this.setState(
+      {
+        contacts:contacts
+      }
+    );
+  }
+  render(){
+
+    return (
+      <div className="App">
+  
+      <Contacts addContact={this.addContact} contacts={this.state.contacts}/>
+      </div>
+  
+    );
+  }
+
 }
 
 export default App;
